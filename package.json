@@ -9,7 +9,7 @@
     "client:install": "cd client && npm install",
     "server:start": "cd server && npm start",
     "server:install": "cd server && npm install",
-    "clean": "rimraf client/build",
+    "clean": "rm -rf client/build",
     "heroku-postbuild": "npm run install:sub && npm run clean && cd client && npm run build",
     "start": "node server/src/index.js --env production"
   },
