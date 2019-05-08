@@ -13,6 +13,7 @@ import Main from 'components/Main';
 
 function App({ classes }) {
   const [drawer, setDrawer] = useState(false);
+  const [category, setCategory] = useState(false);
   const toggleDrawer = () => setDrawer(!drawer);
   return (
     <Fragment>
@@ -20,11 +21,11 @@ function App({ classes }) {
       <MuiThemeProvider theme={theme}>
         <div className={cl('App', classes.root)}>
           <Router history={history}>
-            <Route render={p => <Header {...p} toggleDrawer={toggleDrawer} />} />
+            <Route render={p => <Header {...p} category={category} toggleDrawer={toggleDrawer} />} />
             <Route render={p => <CategoriesDrawer {...p} isOpen={drawer} setDrawer={setDrawer} />} />
             <Switch>
-              <Route exact path="/" component={Main} />
-              <Route path="/:category" component={Main} />
+              <Route exact path="/" render={p =><Main setCategory={setCategory} {...p}/>} />
+              <Route path="/:category" render={p =><Main setCategory={setCategory} {...p}/>} />
             </Switch>
           </Router>
         </div>
