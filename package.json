@@ -6,9 +6,9 @@
   "scripts": {
     "install:sub": "npm run client:install && npm run server:install",
     "client:start": "cd client && npm start",
-    "client:install": "cd client && npm install",
+    "client:install": "cd client && npm install --dev",
     "server:start": "cd server && npm start",
-    "server:install": "cd server && npm install",
+    "server:install": "cd server && npm install --dev",
     "clean": "rm -rf client/build",
     "heroku-postbuild": "npm run install:sub && npm run clean && cd client && npm run build",
     "start": "node server/src/index.js --env production"
