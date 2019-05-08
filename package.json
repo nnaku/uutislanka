@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "i:sub": "npm run install:sub",
-    "install:sub": "concurrently -n server,client \"npm run client:install\" \"npm run server:install\"",
-    "start": "concurrently -n server,client \"npm run server:start\" \"npm run client:start\"",
+    "install:sub": "npm run client:install && npm run server:install",
     "client:start": "cd client && npm start",
     "client:install": "cd client && npm install",
     "server:start": "cd server && npm start",
-    "server:install": "cd server && npm install"
+    "server:install": "cd server && npm install",
+    "clean": "rimraf client/build",
+    "heroku-postbuild": "npm run install:sub && npm run clean && cd client && npm run build",
+    "start": "node server/src/index.js --env production"
   },
   "keywords": [],
   "author": "",
