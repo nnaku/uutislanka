@@ -1,0 +1,24 @@
+{
+  "name": "news-feed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "i:sub": "npm run install:sub",
+    "install:sub": "concurrently -n server,client \"npm run client:install\" \"npm run server:install\"",
+    "start": "concurrently -n server,client \"npm run server:start\" \"npm run client:start\"",
+    "client:start": "cd client && npm start",
+    "client:install": "cd client && npm install",
+    "server:start": "cd server && npm start",
+    "server:install": "cd server && npm install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react-infinite-scroll-component": "^4.5.2"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
