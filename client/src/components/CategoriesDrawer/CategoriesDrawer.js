@@ -1,6 +1,6 @@
 import React from 'react';
 import cl from 'classnames'
-import {Link} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import Hidden from '@material-ui/core/Hidden';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Drawer from '@material-ui/core/Drawer';
@@ -9,30 +9,40 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 
-import Home from '@material-ui/icons/Home'
+import { toCapitalCase } from 'utils/string';
 
+const categories = ['kotimaa','ulkomaat','politiikka','urheilu','esports','viihde','tekniikka']
 
-
-function DrawerList() {
+function DrawerList({selected, classes}) {
   return (
     <List component="nav">
-      <ListItem button component={Link} to='/'>
-      <ListItemIcon>
-        <Home/>
-      </ListItemIcon>
-        <ListItemText primary="Home" />
+      <ListItem
+        dense
+        button 
+        component={NavLink} to='/'
+        classes={{selected:classes.selected}}
+        selected={'/' === selected}>
+        <ListItemText primary="Tuoreimmat" />
       </ListItem>
-      <ListItem button>
-        <ListItemText primary="Bbbbb" />
-      </ListItem>
-      <ListItem button>
-        <ListItemText primary="Ccccc" />
-      </ListItem>
+      {
+        categories.map(tag=>(
+          <ListItem
+            dense
+            button 
+            component={NavLink} to={`/${tag}`}
+            classes={{selected:classes.selected}}
+            selected={`/${tag}` === selected}>
+            <ListItemText primary={toCapitalCase(tag)} />
+          </ListItem>
+        ))
+      }
+      
+
     </List>
   )
 }
 
-function CategoriesDrawer({ classes, isOpen, setDrawer }) {
+function CategoriesDrawer({ location, classes, isOpen, setDrawer }) {
   const openDrawer = () => setDrawer(true)
   const closeDrawer = () => setDrawer(false)
 
@@ -47,7 +57,7 @@ function CategoriesDrawer({ classes, isOpen, setDrawer }) {
           classes={{ paper: classes.drawerPaper, }}
         >
           <div tabIndex={0} role="button" onClick={closeDrawer} onKeyDown={closeDrawer}>
-            <DrawerList />
+            <DrawerList  classes={classes} selected={location.pathname}/>
           </div>
         </SwipeableDrawer>
       </Hidden>
@@ -57,7 +67,7 @@ function CategoriesDrawer({ classes, isOpen, setDrawer }) {
           variant="permanent"
           classes={{ paper: classes.drawerPaper }}
         >
-          <DrawerList />
+          <DrawerList classes={classes} selected={location.pathname}/>
         </Drawer>
       </Hidden>
     </nav>
