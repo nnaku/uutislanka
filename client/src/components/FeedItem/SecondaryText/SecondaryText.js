@@ -20,7 +20,7 @@ function SecondaryText({ classes, expanded, contentSnippet, isoDate, categories,
   
   const date = moment().isSame(isoDate, 'day') 
   ? moment(isoDate).format('LT') 
-  : moment(isoDate).format('LT l')
+  : moment(isoDate).format('DoM H:mm ')
 
   return (
     <div className={classes.root}>
