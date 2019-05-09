@@ -4,10 +4,10 @@ import cl from 'classnames';
 
 
 
-function Root({ classes,theme }) {
-  const [defaults, setDefaults] = useState(JSON.parse(localStorage.getItem('/')))
+function Root({ classes, theme }) {
+  const [defaults, setDefaults] = useState(JSON.parse(localStorage.getItem('/')) || [])
   const [newDefault, setNewDefault] = useState('')
-  const [ignore, setIgnore] = useState(JSON.parse(localStorage.getItem('ignore')))
+  const [ignore, setIgnore] = useState(JSON.parse(localStorage.getItem('ignore')) || [])
   const [newIgnore, setNewIgnore] = useState('')
 
   useEffect(() => {
@@ -18,28 +18,28 @@ function Root({ classes,theme }) {
     localStorage.setItem('ignore', JSON.stringify(ignore))
   }, [ignore])
 
-  function makeAddHandler({ target, type }){
-      let { value, name } = target
-      if (value.endsWith(",") || (type === "blur" && value)) {
-        if(name === 'defaults'){
-          setDefaults([...defaults, value.replace(",", "").toLowerCase()])
-          setNewDefault('')
-        }else{
-          setIgnore([...ignore, value.replace(",", "").toLowerCase()])
-          setNewIgnore('')
-        }
-      
+  function makeAddHandler({ target, type }) {
+    let { value, name } = target
+    if (value.endsWith(",") || (type === "blur" && value)) {
+      if (name === 'defaults') {
+        setDefaults([...defaults, value.replace(",", "").toLowerCase()])
         setNewDefault('')
       } else {
-        if(name === 'defaults'){
-          setNewDefault(value)
-        }else{
-          setNewIgnore(value)
-        }
-        
+        setIgnore([...ignore, value.replace(",", "").toLowerCase()])
+        setNewIgnore('')
       }
+
+      setNewDefault('')
+    } else {
+      if (name === 'defaults') {
+        setNewDefault(value)
+      } else {
+        setNewIgnore(value)
+      }
+
     }
-  
+  }
+
   function makeDefDelHandler(element) {
     return function () {
       setDefaults(defaults.filter(e => e !== element))
@@ -56,16 +56,16 @@ function Root({ classes,theme }) {
     <Fragment>
       <Grid container>
         <Grid item xs={12}>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={!theme.isLight}
-              onChange={theme.toggleTheme}
-              value="isLight"
-            />
-          }
-          label="Tumma teema"
-        />
+          <FormControlLabel
+            control={
+              <Switch
+                checked={!theme.isLight}
+                onChange={theme.toggleTheme}
+                value="isLight"
+              />
+            }
+            label="Tumma teema"
+          />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography variant="h5">Tuoreimmat</Typography>
