@@ -9,35 +9,48 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 
+import Settings from '@material-ui/icons/Settings'
+
 import { toCapitalCase } from 'utils/string';
 
 const categories = ['kotimaa','ulkomaat','politiikka','urheilu','esports','viihde','tekniikka']
 
 function DrawerList({selected, classes}) {
   return (
-    <List component="nav">
+    <List component="nav" disablePadding classes={{root:classes.root}}>
       <ListItem
         dense
         button 
         component={NavLink} to='/'
-        classes={{selected:classes.selected}}
+        classes={{root:classes.listItem, selected:classes.selected}}
         selected={'/' === selected}>
         <ListItemText primary="Tuoreimmat" />
       </ListItem>
       {
         categories.map(tag=>(
           <ListItem
+            key={tag}
             dense
             button 
             component={NavLink} to={`/${tag}`}
-            classes={{selected:classes.selected}}
+            classes={{root:classes.listItem,selected:classes.selected}}
             selected={`/${tag}` === selected}>
+            
             <ListItemText primary={toCapitalCase(tag)} />
           </ListItem>
         ))
       }
       
-
+      <ListItem
+        dense
+        button 
+        component={NavLink} to='/settings'
+        classes={{root:classes.listItem,selected:classes.selected}}
+        selected={'/settings' === selected}>
+        
+        <ListItemText primary="Settings" />
+        <ListItemIcon children={<Settings/>}/>
+      </ListItem>
     </List>
   )
 }
