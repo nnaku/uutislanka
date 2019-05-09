@@ -12,16 +12,20 @@ function SecondaryText({ classes, expanded, contentSnippet, isoDate, categories,
 
   function createInfoRow(items) {
     return items.map((item, index) => (
-      <Typography className={classes.displayRow} inline color="textSecondary">
+      <Typography key={item} className={classes.displayRow} inline color="textSecondary">
         {index < 2 ? toCapitalCase(item) : <Link className={classes.categoryLink} to={`/${item}`}>{toCapitalCase(item)}</Link>}
       </Typography>
     ))
   }
+  
+  const date = moment().isSame(isoDate, 'day') 
+  ? moment(isoDate).format('LT') 
+  : moment(isoDate).format('LT l')
 
   return (
     <div className={classes.root}>
       <Collapse in={expanded} collapsedHeight="20px">
-        {createInfoRow([feeds[0].publisher, moment(isoDate).calendar(), ...categories])}
+        {createInfoRow([date, feeds[0].publisher, ...categories])}
         <Typography color="textSecondary">
           {contentSnippet}
         </Typography>
