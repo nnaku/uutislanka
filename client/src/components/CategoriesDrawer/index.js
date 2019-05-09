@@ -1,7 +1,7 @@
 import CategoriesDrawer from './CategoriesDrawer'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import styles from './CategoriesDrawer.css'
+import styles from './style.css'
 
 CategoriesDrawer.propTypes = {
   classes:PropTypes.object.isRequired,

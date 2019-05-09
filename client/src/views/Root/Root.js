@@ -1,17 +1,17 @@
 import React, { Fragment, useState } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
-import history from 'utils/history';
-
-import cl from 'classnames';
 import { MuiThemeProvider } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import {CssBaseline,Paper} from '@material-ui/core';
+import cl from 'classnames';
+import history from 'utils/history';
 import theme from 'styles/themes'
 import Header from 'components/Header';
 import CategoriesDrawer from 'components/CategoriesDrawer';
-import Main from 'components/Main';
+import Feed from 'components/Feed';
+import Settings from 'views/Settings'
 
 
-function App({ classes }) {
+function Root({ classes }) {
   const [drawer, setDrawer] = useState(false);
   const [category, setCategory] = useState(false);
   const toggleDrawer = () => setDrawer(!drawer);
@@ -19,14 +19,18 @@ function App({ classes }) {
     <Fragment>
       <CssBaseline />
       <MuiThemeProvider theme={theme}>
-        <div className={cl('App', classes.root)}>
+        <div className={cl(classes.root)}>
           <Router history={history}>
             <Route render={p => <Header {...p} category={category} toggleDrawer={toggleDrawer} />} />
             <Route render={p => <CategoriesDrawer {...p} isOpen={drawer} setDrawer={setDrawer} />} />
-            <Switch>
-              <Route exact path="/" render={p =><Main setCategory={setCategory} {...p}/>} />
-              <Route path="/:category" render={p =><Main setCategory={setCategory} {...p}/>} />
-            </Switch>
+            <Paper className={cl(classes.mainPaper)}>
+              <Switch>
+                <Route path="/settings" render={p =><Settings setCategory={setCategory} {...p}/>} />
+                <Route exact path="/" render={p =><Feed setCategory={setCategory} {...p}/>} />
+                <Route path="/:category" render={p =><Feed setCategory={setCategory} {...p}/>} />
+                
+              </Switch>
+            </Paper>
           </Router>
         </div>
       </MuiThemeProvider>
@@ -34,4 +38,4 @@ function App({ classes }) {
   );
 }
 
-export default App;
+export default Root;
