@@ -59,7 +59,7 @@ module.exports = [
   { publisher:'Ilta-Sanomat', tags: ['tekniikka', 'auto'], url: 'https://www.is.fi/rss/autot.xml' },
   { publisher:'Ilta-Sanomat', tags: ['tekniikka', 'digitoday', 'digi', 'it'], url: 'https://www.is.fi/rss/digitoday.xml' },
   { publisher:'Ilta-Sanomat', tags: ['tekniikka', 'esports', 'eurheilu'], url: 'https://www.is.fi/rss/digitoday/esports.xml' },
-  { publisher:'Ilta-Sanomat', tags: ['tekniikka', 'it', 'mobiili', 'atk', 'tietotekniikka'], url: 'https://www.io-tech.fi/feed/' },
+  { publisher:'IO-tech', tags: ['tekniikka', 'it', 'mobiili', 'atk', 'tietotekniikka'], url: 'https://www.io-tech.fi/feed/' },
   { publisher:'Iltalehti', tags: [], url: 'https://www.iltalehti.fi/rss/uutiset.xml' },
   { publisher:'Iltalehti', tags: ['urheilu'], url: 'https://www.iltalehti.fi/rss/urheilu.xml' },
   { publisher:'Iltalehti', tags: ['urheilu','jääkiekko'], url: 'https://www.iltalehti.fi/rss/jaakiekko.xml' },
