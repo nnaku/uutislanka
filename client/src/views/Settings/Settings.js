@@ -1,10 +1,10 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { Typography, Grid, Chip, TextField } from '@material-ui/core';
+import { Typography, Grid, Chip, TextField, Switch, FormControlLabel } from '@material-ui/core';
 import cl from 'classnames';
 
 
 
-function Root({ classes }) {
+function Root({ classes,theme }) {
   const [defaults, setDefaults] = useState(JSON.parse(localStorage.getItem('/')))
   const [newDefault, setNewDefault] = useState('')
   const [ignore, setIgnore] = useState(JSON.parse(localStorage.getItem('ignore')))
@@ -55,6 +55,18 @@ function Root({ classes }) {
   return (
     <Fragment>
       <Grid container>
+        <Grid item xs={12}>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={!theme.isLight}
+              onChange={theme.toggleTheme}
+              value="isLight"
+            />
+          }
+          label="Tumma teema"
+        />
+        </Grid>
         <Grid item xs={12} sm={6}>
           <Typography variant="h5">Tuoreimmat</Typography>
           <div>
