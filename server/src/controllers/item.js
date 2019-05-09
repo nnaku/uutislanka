@@ -13,7 +13,6 @@ exports.getAll = function (req, res) {
       $in: sanitize(req.query.defaults)
     }
   }
-console.log(sanitize(req.query.defaults));
   if (req.query.ignore) {
     find.categories = { 
       ...find.categories,
@@ -46,8 +45,6 @@ exports.getCategory = function (req, res) {
   if (req.query.ignore) {
     find.categories = { ...find.categories, $nin: sanitize(req.query.ignore) }
   }
-
-  console.log(find);
   Item
     .paginate(find, {
       populate: {

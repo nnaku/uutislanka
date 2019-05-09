@@ -9,15 +9,11 @@ httpClient.interceptors.request.use(function (config) {
   // Do something before request is sent
   let {params, url, baseURL} = config
   const key = url.replace(baseURL,"")
-
   config.params = {
     ...params, 
     defaults: JSON.parse(localStorage.getItem(key)),
     ignore: JSON.parse(localStorage.getItem('ignore'))
   }
-
-  
-  console.log(config)
   return config;
   
 }, function (error) {
