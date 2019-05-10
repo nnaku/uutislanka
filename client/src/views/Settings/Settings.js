@@ -72,6 +72,7 @@ function Root({ classes, theme, setCategory  }) {
           <TextField
           fullWidth
             label="Lisää kategoria"
+            placeholder="Erottele pilkulla"
             name="defaults"
             className={classes.textField}
             value={newDefault}
@@ -94,7 +95,8 @@ function Root({ classes, theme, setCategory  }) {
 
           <TextField
           fullWidth
-            label="Add to ignore"
+            label="Piilota kategoria"
+            placeholder="Erottele pilkulla"
             name="Piilota kategoria"
             className={classes.textField}
             value={newIgnore}
