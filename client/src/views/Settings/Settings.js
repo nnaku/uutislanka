@@ -108,9 +108,9 @@ function Root({ classes, theme, setCategory  }) {
           <FormControlLabel
             control={
               <Switch
-                checked={!theme.isLight}
+                checked={theme.isDarkTheme}
                 onChange={theme.toggleTheme}
-                value="isLight"
+                value="isDarkTheme"
               />
             }
             label="Tumma teema"

@@ -14,23 +14,23 @@ import Settings from 'views/Settings'
 function Root({ classes }) {
   const [drawer, setDrawer] = useState(false);
   const [category, setCategory] = useState(false);
-  const [isLight, setTheme] = useState(JSON.parse(localStorage.getItem('theme')) || false)
+  const [isDarkTheme, setTheme] = useState(JSON.parse(localStorage.getItem('isDarkTheme')) || false)
   const toggleTheme = () => {
-    localStorage.setItem('isLightTheme', JSON.stringify(isLight))
-    setTheme(!isLight)
+    localStorage.setItem('isDarkTheme', JSON.stringify(!isDarkTheme))
+    setTheme(!isDarkTheme)
   }
   const toggleDrawer = () => setDrawer(!drawer);
   return (
     <Fragment>
       <CssBaseline />
-      <MuiThemeProvider theme={isLight ? lightTheme : darkTheme}>
+      <MuiThemeProvider theme={isDarkTheme ? darkTheme:lightTheme}>
         <div className={cl(classes.root)}>
           <Router history={history}>
             <Route render={p => <Header {...p} category={category} toggleDrawer={toggleDrawer} />} />
             <Route render={p => <CategoriesDrawer {...p} isOpen={drawer} setDrawer={setDrawer} />} />
             <Paper square elevation="0" className={cl(classes.mainPaper)}>
               <Switch>
-                <Route path="/settings" render={p => <Settings setCategory={setCategory} theme={{isLight,toggleTheme}} {...p} />} />
+                <Route path="/settings" render={p => <Settings setCategory={setCategory} theme={{isDarkTheme,toggleTheme}} {...p} />} />
                 <Route exact path="/" render={p => <Feed setCategory={setCategory} {...p} />} />
                 <Route path="/:category" render={p => <Feed setCategory={setCategory} {...p} />} />
 
