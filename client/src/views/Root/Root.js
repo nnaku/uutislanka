@@ -25,7 +25,7 @@ function Root({ classes }) {
           <Router history={history}>
             <Route render={p => <Header {...p} category={category} toggleDrawer={toggleDrawer} />} />
             <Route render={p => <CategoriesDrawer {...p} isOpen={drawer} setDrawer={setDrawer} />} />
-            <Paper square className={cl(classes.mainPaper)}>
+            <Paper square elevation="0" className={cl(classes.mainPaper)}>
               <Switch>
                 <Route path="/settings" render={p => <Settings setCategory={setCategory} theme={{isLight,toggleTheme}} {...p} />} />
                 <Route exact path="/" render={p => <Feed setCategory={setCategory} {...p} />} />

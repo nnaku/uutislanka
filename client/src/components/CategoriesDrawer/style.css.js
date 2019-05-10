@@ -3,23 +3,23 @@ export default theme => ({
   root: {
     display:'flex',
     flexDirection:'column',
-    [theme.breakpoints.up('sm')]: {
-      width: drawerWidth,
+    
+    [theme.breakpoints.up('md')]: {
       flexShrink: 0,
-    },
-    minHeight: `calc(100vh - ${headerHeight}px)`,
-
+      width: drawerWidth,
+      height: `calc(100vh - ${headerHeight}px)`,
+    }
+  },
+  listRoot:{
+    height: '100vh',
+    [theme.breakpoints.up('md')]: {
+      height: `calc(100vh - ${headerHeight}px)`,
+    }
   },
   drawerPaper: {
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing.unit * 8,
-    },
     width: drawerWidth,
-    backgroundColor: theme.palette.background,
-  },
-  listItem: {
-    '&:last-of-type': {
-      marginTop: 'auto'
-    }
+    [theme.breakpoints.up('md')]: {
+      top:theme.spacing.unit * 6
+    },
   },
 })

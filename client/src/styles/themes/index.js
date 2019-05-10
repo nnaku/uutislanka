@@ -6,6 +6,7 @@ export const darkTheme = createMuiTheme({
   overrides,
   typography: {
     useNextVariants: true,
+    lineHeight: 1
   },
   palette: {
     type: 'dark',

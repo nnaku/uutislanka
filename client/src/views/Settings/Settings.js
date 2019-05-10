@@ -4,11 +4,15 @@ import cl from 'classnames';
 
 
 
-function Root({ classes, theme }) {
+function Root({ classes, theme, setCategory  }) {
   const [defaults, setDefaults] = useState(JSON.parse(localStorage.getItem('/')) || [])
   const [newDefault, setNewDefault] = useState('')
   const [ignore, setIgnore] = useState(JSON.parse(localStorage.getItem('ignore')) || [])
   const [newIgnore, setNewIgnore] = useState('')
+  
+  useEffect(()=>{
+    setCategory('Asetukset')
+  },[])
 
   useEffect(() => {
     localStorage.setItem('/', JSON.stringify(defaults))
@@ -54,7 +58,52 @@ function Root({ classes, theme }) {
 
   return (
     <Fragment>
-      <Grid container>
+      <Grid container spacing={32}>
+        <Grid item xs={12} sm={6}>
+          <Typography variant="h6">Oma feedi</Typography>
+          <div>
+            {defaults.map(item => <Chip
+              label={item}
+              name=""
+              onDelete={makeDefDelHandler(item)}
+              className={classes.chip}
+              color="primary"
+            />)}
+          </div>
+
+          <TextField
+          fullWidth
+            label="Lisää kategoria"
+            name="defaults"
+            className={classes.textField}
+            value={newDefault}
+            onChange={makeAddHandler}
+            onBlur={makeAddHandler}
+            helperText={'Koosata oma "Tuoremmat" lista vain valituista kategorioista!'}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Typography variant="h6">Suodatin</Typography>
+          <div>
+            {ignore.map(item => <Chip
+              label={item}
+              onDelete={makeIgnDelHandler(item)}
+              className={classes.chip}
+              color="primary"
+            />)}
+          </div>
+
+          <TextField
+          fullWidth
+            label="Add to ignore"
+            name="Piilota kategoria"
+            className={classes.textField}
+            value={newIgnore}
+            onChange={makeAddHandler}
+            onBlur={makeAddHandler}
+            helperText={'Piilota valittujen kategorioiden uutiset kaikista listoista!'}
+          />
+        </Grid>
         <Grid item xs={12}>
           <FormControlLabel
             control={
@@ -65,45 +114,6 @@ function Root({ classes, theme }) {
               />
             }
             label="Tumma teema"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography variant="h5">Tuoreimmat</Typography>
-          <div>
-            {defaults.map(item => <Chip
-              label={item}
-              name=""
-              onDelete={makeDefDelHandler(item)}
-              className={classes.chip}
-              color="primary"
-            />)}
-          </div>
-          <TextField
-            label="Add to defaults"
-            name="defaults"
-            className={classes.textField}
-            value={newDefault}
-            onChange={makeAddHandler}
-            onBlur={makeAddHandler}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography variant="h5">Ignore</Typography>
-          <div>
-            {ignore.map(item => <Chip
-              label={item}
-              onDelete={makeIgnDelHandler(item)}
-              className={classes.chip}
-              color="primary"
-            />)}
-          </div>
-          <TextField
-            label="Add to ignore"
-            name="ignore"
-            className={classes.textField}
-            value={newIgnore}
-            onChange={makeAddHandler}
-            onBlur={makeAddHandler}
           />
         </Grid>
       </Grid>

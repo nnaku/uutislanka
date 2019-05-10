@@ -12,8 +12,9 @@ function SecondaryText({ classes, expanded, contentSnippet, isoDate, categories,
 
   function createInfoRow(items) {
     return items.map((item, index) => (
-      <Typography key={item} className={classes.displayRow} inline color="textSecondary">
+      <Typography variant="caption" key={item} inline color="textSecondary">
         {index < 2 ? toCapitalCase(item) : <Link className={classes.categoryLink} to={`/${item}`}>{toCapitalCase(item)}</Link>}
+        {' '}
       </Typography>
     ))
   }

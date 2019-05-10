@@ -6,7 +6,7 @@ export default theme => ({
   },
   menuButton: {
     marginRight: 20,
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       display: 'none',
     },
   },
@@ -20,7 +20,7 @@ export default theme => ({
     marginRight: theme.spacing.unit * 2,
     marginLeft: 0,
     width: '100%',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       marginLeft: theme.spacing.unit * 3,
       width: 'auto',
     },
