@@ -14,8 +14,11 @@ import Settings from 'views/Settings'
 function Root({ classes }) {
   const [drawer, setDrawer] = useState(false);
   const [category, setCategory] = useState(false);
-  const [isLight, setLight] = useState(true)
-  const toggleTheme = () => setLight(!isLight)
+  const [isLight, setTheme] = useState(JSON.parse(localStorage.getItem('theme')) || false)
+  const toggleTheme = () => {
+    localStorage.setItem('isLightTheme', JSON.stringify(isLight))
+    setTheme(!isLight)
+  }
   const toggleDrawer = () => setDrawer(!drawer);
   return (
     <Fragment>
