@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import cl from 'classnames'
 import { NavLink } from 'react-router-dom'
 import Hidden from '@material-ui/core/Hidden';
@@ -9,29 +9,32 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText'
 
 import { toCapitalCase } from 'utils/string';
+import { Divider } from '@material-ui/core';
 
-const categories = ['kotimaa','ulkomaat','politiikka','urheilu','esports','viihde','tekniikka']
+const categories = ['kotimaa', 'ulkomaat', 'politiikka', 'urheilu', 'esports', 'viihde', 'tekniikka']
 
-function DrawerList({selected, classes}) {
+function DrawerList({ selected, classes }) {
   return (
-    <List disablePadding classes={{root:classes.listRoot}}>
+    <List disablePadding classes={{ root: classes.listRoot }}>
       <ListItem
         button
         component={NavLink} to='/'
-        classes={{root:classes.listItem, selected:classes.selected}}
+        classes={{ root: classes.listItem, divider: classes.listItemDivider, selected: classes.selected }}
         selected={'/' === selected}>
-        <ListItemText primaryTypographyProps={{variant:"h6"}}  primary="Tuoreimmat" />
+        <ListItemText primaryTypographyProps={{ variant: "h6" }} primary="Tuoreimmat" />
       </ListItem>
+      <Divider />
       {
-        categories.map(tag=>(
+        categories.map(tag => (<Fragment key={tag}>
           <ListItem
-            key={tag}
-            button 
+            button
             component={NavLink} to={`/${tag}`}
-            classes={{root:classes.listItem,selected:classes.selected}}
+            classes={{ root: classes.listItem, selected: classes.selected }}
             selected={`/${tag}` === selected}>
-            <ListItemText primaryTypographyProps={{variant:"h6"}} primary={toCapitalCase(tag)} />
+            <ListItemText primaryTypographyProps={{ variant: "h6" }} primary={toCapitalCase(tag)} />
           </ListItem>
+          <Divider />
+        </Fragment>
         ))
       }
     </List>
@@ -53,7 +56,7 @@ function CategoriesDrawer({ location, classes, isOpen, setDrawer }) {
           classes={{ paper: classes.drawerPaper, }}
         >
           <div tabIndex={0} role="button" onClick={closeDrawer} onKeyDown={closeDrawer}>
-            <DrawerList  classes={classes} selected={location.pathname}/>
+            <DrawerList classes={classes} selected={location.pathname} />
           </div>
         </SwipeableDrawer>
       </Hidden>
@@ -62,9 +65,8 @@ function CategoriesDrawer({ location, classes, isOpen, setDrawer }) {
           open
           variant="permanent"
           classes={{ paper: classes.drawerPaper }}
-          elevation="0"
         >
-          <DrawerList classes={classes} selected={location.pathname}/>
+          <DrawerList classes={classes} selected={location.pathname} />
         </Drawer>
       </Hidden>
     </nav>

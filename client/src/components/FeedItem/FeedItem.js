@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState } from 'react';
 import { ListItem, ListItemText, ListItemSecondaryAction, IconButton } from '@material-ui/core';
-
 import ShowLessIcon from '@material-ui/icons/ExpandLess'
 import ShowMoreIcon from '@material-ui/icons/ExpandMore'
-
 import SecondaryText from './SecondaryText'
 import PrimaryText from './PrimaryText'
-
 
 function FeedItem({ classes, item }) {
   const [expanded, setExpanded] = useState(false)

@@ -1,8 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Typography, Grid, Chip, TextField, Switch, FormControlLabel } from '@material-ui/core';
-import cl from 'classnames';
-
-
 
 function Root({ classes, theme, setCategory  }) {
   const [defaults, setDefaults] = useState(JSON.parse(localStorage.getItem('/')) || [])
@@ -63,6 +60,7 @@ function Root({ classes, theme, setCategory  }) {
           <Typography variant="h6">Oma feedi</Typography>
           <div>
             {defaults.map(item => <Chip
+              key={item}
               label={item}
               name=""
               onDelete={makeDefDelHandler(item)}
@@ -86,6 +84,7 @@ function Root({ classes, theme, setCategory  }) {
           <Typography variant="h6">Suodatin</Typography>
           <div>
             {ignore.map(item => <Chip
+              key={item}
               label={item}
               onDelete={makeIgnDelHandler(item)}
               className={classes.chip}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Typography, Link } from '@material-ui/core';
 import { unstable_useMediaQuery as useMediaQuery } from '@material-ui/core/useMediaQuery';
 

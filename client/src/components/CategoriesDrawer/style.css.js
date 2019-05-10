@@ -16,6 +16,9 @@ export default theme => ({
       height: `calc(100vh - ${headerHeight}px)`,
     }
   },
+  listItemDivider:{
+    borderBottom: theme.palette.divider
+  },
   drawerPaper: {
     width: drawerWidth,
     [theme.breakpoints.up('md')]: {
