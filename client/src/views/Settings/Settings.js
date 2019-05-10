@@ -82,7 +82,7 @@ function Root({ classes, theme, setCategory }) {
         <Grid item xs={12} sm={6}>
           <Typography variant="h6">Oma feedi</Typography>
           <Typography>
-            Koosata oma "Tuoremmat" lista vain valituista kategorioista!
+            Kokoa oma "Tuoremmat" lista, vain valitsemistasi kategorioista!
           </Typography>
           <TextField
             fullWidth
