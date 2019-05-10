@@ -8,20 +8,23 @@ import http from 'utils/http';
 
 function Feed({ classes, match, setCategory }) {
   const [feed, setFeed] = useState({ docs: [] });
+  const [expanded, setExpanded] = useState(null);
   const url = match.params.category ? `/${match.params.category}` : '/';
 
   useEffect(() => {
-    setCategory(url.replace("/",""))
+    setCategory(url.replace("/", ""))
     http({ url }).then(feed => {
       setFeed(feed);
       window.scrollTo(0, 0);
     });
   }, [url]);
 
-  const getNext = () =>
-    http({ url, params: { page: feed.page + 1 } }).then(nextPage =>
-      setFeed({ ...nextPage, docs: [...feed.docs, ...nextPage.docs] })
-    );
+  const getNext = () => http({ url, params: { page: feed.page + 1 } }).then(nextPage => setFeed({ ...nextPage, docs: [...feed.docs, ...nextPage.docs] }))
+
+  const expandHandler = guid => () => guid === expanded ? setExpanded(null) : setExpanded(guid)
+
+  
+
 
   return (
     <List className={cl(classes.list)}>
@@ -33,7 +36,7 @@ function Feed({ classes, match, setCategory }) {
         endMessage={feed.docs.length ? 'Loppu!' : ''}
         children={feed.docs}
       >
-        {feed.docs.map((item, index) => <FeedItem key={item.guid} item={item} />)}
+        {feed.docs.map((item, index) => <FeedItem key={item.guid} item={item} expanded={expanded === item.guid} toggleExpandedView={expandHandler(item.guid)} />)}
       </InfiniteScroll>
     </List>
   );

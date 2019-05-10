@@ -5,5 +5,8 @@ export default theme => ({
     '&:hover':{
       textDecoration:'underline'
     }
+  },
+  contentSnippet:{
+    marginTop: theme.spacing.unit
   }
 });

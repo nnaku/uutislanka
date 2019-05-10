@@ -1,15 +1,11 @@
 import React from 'react';
 import moment from 'utils/moment'
-import { Collapse, Typography } from '@material-ui/core';
+import { Collapse, Typography, Divider } from '@material-ui/core';
 import { Link } from 'react-router-dom'
 
 import { toCapitalCase } from 'utils/string'
 
-
-
-
 function SecondaryText({ classes, expanded, contentSnippet, isoDate, categories, feeds }) {
-
   function createInfoRow(items) {
     return items.map((item, index) => (
       <Typography variant="caption" key={item} inline color="textSecondary">
@@ -25,9 +21,10 @@ function SecondaryText({ classes, expanded, contentSnippet, isoDate, categories,
 
   return (
     <div className={classes.root}>
-      <Collapse in={expanded} collapsedHeight="20px">
+      <Collapse in={expanded} collapsedHeight="1rem">
         {createInfoRow([date, feeds[0].publisher, ...categories])}
-        <Typography color="textSecondary">
+        <Divider/>
+        <Typography paragraph variant="body1" className={classes.contentSnippet}>
           {contentSnippet}
         </Typography>
       </Collapse>
