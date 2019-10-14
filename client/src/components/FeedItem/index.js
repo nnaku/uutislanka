@@ -1,10 +1,8 @@
-import FeedItem from './FeedItem'
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import styles from './FeedItem.css'
+import FeedItem from './FeedItem';
+// import PropTypes from 'prop-types';
 
-FeedItem.propTypes = {
-  classes:PropTypes.object.isRequired,
-}
+// FeedItem.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
 
-export default withStyles(styles, { withTheme: true })(FeedItem)
+export default FeedItem;

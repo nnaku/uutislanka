@@ -1,11 +1,8 @@
-import PrimaryText from './PrimaryText'
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import styles from './styles.css'
+import PrimaryText from './PrimaryText';
+// import PropTypes from 'prop-types';
 
-PrimaryText.propTypes = {
-  classes:PropTypes.object.isRequired,
-}
+// PrimaryText.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
 
-export default withStyles(styles, { withTheme: true })(PrimaryText)
-
+export default PrimaryText;
