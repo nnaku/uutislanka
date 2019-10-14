@@ -8,6 +8,7 @@ const feedSchema = new Schema({
     unique: true,
     index: true,
   },
+  categories: [String],
   image: {
     link: String,
     url: String,
