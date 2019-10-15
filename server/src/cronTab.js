@@ -1,39 +1,34 @@
+const CronJob = require('cron').CronJob;
 const parser = require('./parser');
-const models = require('./models');
-
-const parseFeed = async feed =>
-  await parser({
-    publisher: feed.feed,
-    url: feed.feedUrl,
-    tags: feed.categories,
-  });
+const { Item, Feed } = require('./models');
 
 /* running a task every minute */
+const parseCron = new CronJob('0 * * * * *', async () => {
+  console.log('Parsing...');
+  const feeds = await Feed.find({});
+  feeds.forEach(async feed => {
+    try {
+      const parsedFeed = await parser({
+        publisher: feed.feed,
+        url: feed.feedUrl,
+        tags: feed.categories,
+      });
+
+      parsedFeed.items.forEach(async ({ categories, ...rest }) => {
+        Item.findOneAndUpdate(
+          { guid: rest.guid },
+          {
+            ...rest,
+            $addToSet: { categories: categories, feeds: feed },
+          },
+          { setDefaultsOnInsert: true, new: true, upsert: true }
+        );
+      });
+    } catch (error) {
+      console.error('parser error', { error });
+    }
+  });
+});
+
+parseCron.start();
 console.log('cron jobs runnign every minute');
-!(async function() {
-  console.log('Parsing sources:');
-  models.Feed.find({})
-    .then(feeds => Promise.all(feeds.map(parseFeed)))
-    .catch(e => console.log('parseFeed', e))
-    .then(parsedFeeds =>
-      Promise.all(
-        parsedFeeds.map(({ feed, items }) =>
-          Promise.all(
-            items.map(({ categories, ...rest }) =>
-              Promise.all(
-                models.Item.findOneAndUpdate(
-                  { guid: rest.guid },
-                  {
-                    ...rest,
-                    $addToSet: { categories: categories, feeds: feed },
-                  },
-                  { setDefaultsOnInsert: true, new: true, upsert: true }
-                )
-              )
-            )
-          )
-        )
-      )
-    )
-    .catch(e => console.error(e));
-})();
