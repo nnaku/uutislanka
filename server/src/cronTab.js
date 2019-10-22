@@ -19,9 +19,15 @@ const parseCron = new CronJob('0 * * * * *', async () => {
           { guid: rest.guid },
           {
             ...rest,
-            $addToSet: { categories: categories, feeds: feed },
+            $addToSet: {
+              categories: categories,
+              feeds: { ...feed.toJSON(), ...parsedFeed.feed },
+            },
           },
-          { setDefaultsOnInsert: true, new: true, upsert: true }
+          { setDefaultsOnInsert: true, new: true, upsert: true },
+          err => {
+            if (err) throw err;
+          }
         );
       });
     } catch (error) {

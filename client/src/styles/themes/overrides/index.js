@@ -1,5 +1,5 @@
-import MuiLink from './MuiLink'
+import MuiLink from './MuiLink';
 
 export default {
-  MuiLink
-}
+  MuiLink,
+};
