@@ -1,3 +1,3 @@
 export default {
-  type: 'light',
+  type: 'dark',
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import cl from 'classnames';
+import history from 'utils/history';
 
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { List, Dialog, makeStyles } from '@material-ui/core';
@@ -24,8 +25,23 @@ function Feed({ match, setCategory }) {
   const [expanded, setExpanded] = useState(null);
   const [preview, setPreview] = useState(false);
 
+  useEffect(() => {
+    if ('dialog' === localStorage.getItem('openTo')) {
+      if (!preview) {
+        history.listen((location, action) => {
+          if (action === 'POP') {
+            setPreview(false);
+          }
+        });
+      } else {
+        history.push(`${match.url}#dialog`);
+      }
+    }
+  }, [preview]);
+
   function closePreview() {
     setPreview(false);
+    history.goBack();
   }
 
   const url = match.params.category ? `/${match.params.category}` : '/';
@@ -68,7 +84,7 @@ function Feed({ match, setCategory }) {
           ))}
         </InfiniteScroll>
       </List>
-      <Dialog maxWidth="sm" fullWidth open={preview} onClose={closePreview}>
+      <Dialog maxWidth="sm" fullWidth open={!!preview} onClose={closePreview}>
         <Iframe
           url={preview}
           width="100%"
