@@ -35,7 +35,6 @@ export default theme => ({
     justifyContent: 'center',
   },
   inputRoot: {
-    color: 'inherit',
     width: '100%',
   },
   inputInput: {

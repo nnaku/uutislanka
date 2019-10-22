@@ -3,11 +3,11 @@ import dark from './dark';
 import light from './light';
 
 export const darkPalette = {
-  ...dark,
   ...common,
+  ...dark,
 };
 
 export const lightPalette = {
-  ...light,
   ...common,
+  ...light,
 };
